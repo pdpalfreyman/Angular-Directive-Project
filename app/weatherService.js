@@ -8,12 +8,12 @@ app.service('weatherService', function($http, $q){
 			method: 'GET',
 			url:'http://api.openweathermap.org/data/2.5/weather?q=' + city
 		}).then(function(results){
-			console.log(results)
+			// console.log(results)
 			var tempKelv = results.data.main.temp
 			var newWeather = {};
 			newWeather.description =results.data.weather[0].description
-			newWeather.temp = ((tempKelv - 273)*9/5) + 32
-			console.log(newWeather)
+			newWeather.temp = Math.floor(((tempKelv - 273)*9/5) + 32)
+			deferred.resolve(newWeather);
 		})
 		return deferred.promise;
 	};

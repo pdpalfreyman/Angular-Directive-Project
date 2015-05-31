@@ -9,9 +9,11 @@ app.directive('dirWeather', function(){
  			weatherCall: '&'
  		},
  		controller: function($scope){
- 			$scope.weatherCall({ city: $scope.currentUser.city }).then(function(results){
- 				$scope.newWeather = results;
- 				console.log(results)
+ 			$scope.$watch('currentUser', function(){
+				$scope.weatherCall({ city: $scope.currentUser.city }).then(function(results){
+ 					$scope.newWeather = results;
+ 					// console.log(results)
+ 				});
  			});
 		}
 	}
